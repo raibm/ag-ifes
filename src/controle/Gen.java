@@ -3,19 +3,10 @@ package controle;
 import java.util.ArrayList;
 
 public class Gen {
-	private int preferencia;
 	private Materia materia;
 
 	public Gen(Materia materia) {
 		this.materia = materia;
-	}
-
-	public int getPreferencia() {
-		return preferencia;
-	}
-
-	public void setPreferencia(int preferencia) {
-		this.preferencia = preferencia;
 	}
 
 	public Materia getMateria() {
@@ -46,7 +37,8 @@ public class Gen {
 		Gen gen = null;
 		do {
 			gen = materias.get(i);
-			if (gen.getMateria().getNumAulas() % 2 == 1 && !gen.getMateria().getNomeMateria().equals(gene.getMateria().getNomeMateria())) {
+			if (gen.getMateria().getNumAulas() % 2 == 1
+					&& !gen.getMateria().getNomeMateria().equals(gene.getMateria().getNomeMateria())) {
 				return gen;
 			}
 			i++;
@@ -65,6 +57,6 @@ public class Gen {
 
 	@Override
 	public String toString() {
-		return materia + "\n";
+		return materia + "";
 	}
 }
