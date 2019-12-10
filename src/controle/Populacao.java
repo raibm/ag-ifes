@@ -23,15 +23,14 @@ public class Populacao {
 		encontrarTop1();
 	}
 
-	
 	@Override
 	public String toString() {
-		String s = "Populacao\n"; 
-		 for (Cromossomo cromossomo : listaCromossomos) {
-			 s += cromossomo;
+		String s = "Populacao\n";
+		for (Cromossomo cromossomo : listaCromossomos) {
+			s += cromossomo;
 		}
-		 s+="\ntop1 " + this.getTop1(); 
-		 return s;
+		s += "\ntop1 " + this.getTop1();
+		return s;
 	}
 
 	public void encontrarTop1() {

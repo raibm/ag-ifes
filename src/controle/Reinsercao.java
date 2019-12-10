@@ -2,12 +2,16 @@ package controle;
 
 public class Reinsercao {
 
-	public static void verificarInsercao(Cromossomo cromossomo,
-			Populacao populacao) {
+	public static boolean verificarInsercao(Cromossomo cromossomo,
+			Populacao populacao, Analise analise) {
+		boolean reinserido = false;
 		int pos = piorIndividuoDaPopulacao(populacao);
 		if(populacao.getPopulacao().get(pos).getFitness() < cromossomo.getFitness()){
 			populacao.getPopulacao().set(pos, cromossomo);
+			analise.setContInsercao(analise.getContInsercao()+1);
+			reinserido = true;
 		}
+		return reinserido;
 	}
 	
 	private static int piorIndividuoDaPopulacao(Populacao populacao){

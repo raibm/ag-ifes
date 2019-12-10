@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Cromossomo {
 	private Gen[][] matriz;
 	private double fitness = Double.MIN_VALUE;
+	private boolean mutante = false;
 
 	public Cromossomo() {
 		this.matriz = new Gen[1][20];
@@ -33,11 +34,11 @@ public class Cromossomo {
 
 	public static Cromossomo popularCromossomo() {
 		ArrayList<Gen> materias = Gen.materias(Util.materias_1);
-		
-		for(int i = 0; i < 6; i++){
+
+		for (int i = 0; i < 6; i++) {
 			materias.get(i).getMateria().popularPreferencia();
 		}
-		
+
 		materias.get(0).getMateria().popularPreferencia();
 		Cromossomo cromossomo = new Cromossomo();
 		Gen gen = null;
@@ -99,7 +100,7 @@ public class Cromossomo {
 			for (int j = (posJ - 2); j < posJ; j++) {
 				if (cromossomo.matriz[i][j].getMateria().getNomeMateria().equals(gen.getMateria().getNomeMateria())) {
 					return true;
-				}					
+				}
 			}
 		}
 		return false;
@@ -123,12 +124,20 @@ public class Cromossomo {
 		}
 	}
 
+	public boolean isMutante() {
+		return mutante;
+	}
+
+	public void setMutante(boolean mutante) {
+		this.mutante = mutante;
+	}
+
 	public String toString_old() {
 		String janela = "Cromossomo:\n";
 		for (int i = 0; i < 1; i++) {
 			for (int j = 0; j < 20; j++) {
-				janela += this.matriz[i][j].getMateria().getNomeMateria() + ", " + this.matriz[i][j].getMateria().getMatPreferencia()[i][j]
-						+ "\n";
+				janela += this.matriz[i][j].getMateria().getNomeMateria() + ", "
+						+ this.matriz[i][j].getMateria().getMatPreferencia()[i][j] + "\n";
 			}
 			janela += "\n";
 		}
@@ -138,24 +147,36 @@ public class Cromossomo {
 	@Override
 	public String toString() {
 		String janela = "Cromossomo:\n", linha1 = "", linha2 = "", linha3 = "", linha4 = "";
+		String pref = "", nome = "";
 		for (int i = 0; i < 1; i++) {
 			for (int j = 0; j < 20; j++) {
-				linha1 += "|" + this.matriz[i][j].getMateria().getNomeMateria() + ", "
-						+ this.matriz[i][j].getMateria().getMatPreferencia()[i][j] + "|";
+				if (this.matriz[i][j].getMateria().getMatPreferencia()[i][j] < 10)
+					pref = "0" + this.matriz[i][j].getMateria().getMatPreferencia()[i][j];
+				if (this.matriz[i][j].getMateria().getNomeMateria().length() < 2)
+					pref = " " + pref;
+				linha1 += "|" + this.matriz[i][j].getMateria().getNomeMateria() + ", " + pref + "|";
 				j++;
-				linha2 += "|" + this.matriz[i][j].getMateria().getNomeMateria() + ", "
-						+ this.matriz[i][j].getMateria().getMatPreferencia()[i][j] + "|";
+				if (this.matriz[i][j].getMateria().getMatPreferencia()[i][j] < 10)
+					pref = "0" + this.matriz[i][j].getMateria().getMatPreferencia()[i][j];
+				if (this.matriz[i][j].getMateria().getNomeMateria().length() < 2)
+					pref = " " + pref;
+				linha2 += "|" + this.matriz[i][j].getMateria().getNomeMateria() + ", " + pref + "|";
 				j++;
-				linha3 += "|" + this.matriz[i][j].getMateria().getNomeMateria() + ", "
-						+ this.matriz[i][j].getMateria().getMatPreferencia()[i][j] + "|";
+				if (this.matriz[i][j].getMateria().getMatPreferencia()[i][j] < 10)
+					pref = "0" + this.matriz[i][j].getMateria().getMatPreferencia()[i][j];
+				if (this.matriz[i][j].getMateria().getNomeMateria().length() < 2)
+					pref = " " + pref;
+				linha3 += "|" + this.matriz[i][j].getMateria().getNomeMateria() + ", " + pref + "|";
 				j++;
-				linha4 += "|" + this.matriz[i][j].getMateria().getNomeMateria() + ", "
-						+ this.matriz[i][j].getMateria().getMatPreferencia()[i][j] + "|";
+				if (this.matriz[i][j].getMateria().getMatPreferencia()[i][j] < 10)
+					pref = "0" + this.matriz[i][j].getMateria().getMatPreferencia()[i][j];
+				if (this.matriz[i][j].getMateria().getNomeMateria().length() < 2)
+					pref = " " + pref;
+				linha4 += "|" + this.matriz[i][j].getMateria().getNomeMateria() + ", " + pref + "|";
 			}
 			janela += linha1 + "\n" + linha2 + "\n" + linha3 + "\n" + linha4 + "\n";
-			janela += "Fitness: " + getFitness()+"\n";
+			janela += "Fitness: " + getFitness() + "\n";
 		}
 		return janela;
 	}
-
 }
